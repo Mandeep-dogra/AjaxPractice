@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style>
+		.mybg{ background-color: #ff0000;}
+		.main-div{display:none; opacity:0.5;position:absolute; z-index: 2; background-color:#000; top:0; height:100%; width:100%; color:#fff;}
+		.main-div.indiv{ position:relative;width:450px; margin:20px auto; background-color:#fff; padding:10px;}
+		.my-btn{width:600px; float:right; text-align:right; }
+		#newDriveBtn{display:none;}
+	</style>
+</head>
+<body>
+	<div style="width:600px; margin:0px auto;">
+		<div class="my-btn" id="newDriveBtn">
+			<button onclick="newDriver()">Add new driver</button>
+		</div>
+<div id="dataId">
+	
+	<div id="loader"><img src="images/giphy.gif" /></div>
+</div>
+</div>
+
+
+
+<div class="main-div" id="pop-div">
+<div class="indiv">
+	<p><label>name</label>
+	<input type="text" id="driverName"></p>
+	<p><label>address</label>
+	<input type="text" id="driverAddress"></p>
+	<p><label>Phone number</label>
+		<input type="text" id="driverNumber"></p>
+		<p><button value="" onclick="addDriver()">Save</button>
+			<button value="" onclick="hideOverlay()">Cancel</button></p>
+</div>
+</div>
+</body>
+
+<script src="js/app.js"></script> 
+<script src="js/add-driver.js"></script>
+</html>
