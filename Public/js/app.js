@@ -1,4 +1,6 @@
-var request = new XMLHttpRequest();
+function getDriverData(){
+  //  document.getElementById("loader").style.display="block";
+    var request = new XMLHttpRequest();
 //	console.log(request);
 	request.onreadystatechange  = function(){   
 		//console.log(this.readyState)
@@ -10,7 +12,11 @@ var request = new XMLHttpRequest();
 
 	}
 	request.open("get", "https://restaurantappp.herokuapp.com/api/driver", true );
+    
+
     request.send();
+}
+    
     
     function addToHTML(mydata){
         console.log(mydata.length);
@@ -28,7 +34,7 @@ var request = new XMLHttpRequest();
     }
 
     function addToHTMLTable(mydata){
-        document.getElementById("loader").style.display="none";
+       // document.getElementById("loader").style.display="none";
         document.getElementById("newDriveBtn").style.display="block";
         console.log(mydata.length);
         var obj = JSON.parse(mydata);
@@ -43,7 +49,7 @@ var request = new XMLHttpRequest();
              obj[i] = [obj[i]];
             for(let j=0; j<obj[i].length; j=j+1){
                 
-                liStr = liStr + "<td class='mybg'>" + (i+1) + "</td>" + "<td>" + obj[i][j].name + "</td>" + "<td>" + obj[i][j].phone + "</td>" + "<td>" + obj[i][j].address +"</td>" + "<td><button>Edit</button></td>" + "<td><button>Delete</button></td>";
+                liStr = liStr + '<td class="mybg">' + (i+1) + '</td>' + '<td>' + obj[i][j].name + '</td>' + '<td>' + obj[i][j].phone + '</td>' + '<td>' + obj[i][j].address +'</td>' + '<td><button>Edit</button></td>' + '<td><button onclick="deleteDriver(\'' + obj[i][j]._id + '\')">Delete</button></td>';
             }
             
             liStr = liStr + "</tr>"
@@ -64,3 +70,27 @@ var request = new XMLHttpRequest();
     function hideOverlay(){
         document.getElementById("pop-div").style.display="none";
     }
+
+    getDriverData();
+ function  deleteDriver(id){
+    var deleteRequest = new XMLHttpRequest()
+    deleteRequest.onreadystatechange  = function(){   
+		
+		if(this.readyState==4){
+			//addToHTMLTable(this.responseText);
+            var response  = JSON.parse(this.responseText);
+            if(response.status==true){
+                getDriverData();
+
+            }
+        }
+            
+       
+
+	}
+
+    deleteRequest.open("delete", "https://restaurantappp.herokuapp.com/api/driver/"+id, true );   
+
+    deleteRequest.send();
+
+    } 

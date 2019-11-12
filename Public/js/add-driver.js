@@ -22,9 +22,19 @@ function senToApi(driverObj)
 		if(this.readyState==4){
 			//addToHTMLTable(this.responseText);
 console.log(this.responseText);
-		}
+var obj = JSON.parse(this.responseText);
+if(obj.status==true){
+    // alert("driver have been saved");
+    document.getElementById("pop-div").style.display="none";
+    getDriverData();
+}        
+
+}
+        
+
 
 	}
-	request.open("post", "https://restaurantappp.herokuapp.com/api/driver", true );
-    request.send(driverObj);
+    request.open("post", "https://restaurantappp.herokuapp.com/api/driver", true );
+    request.setRequestHeader("Content-type", "application/json");
+    request.send(newString);
 }
